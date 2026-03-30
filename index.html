@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portofolio | Miftahun Nikmah</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    #home {
+      scroll-margin-top: 100px; /* Sesuaikan dengan tinggi navbar */
+      /* Memastikan konten tidak terlalu mepet ke atas karena navbar fixed */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    /* Perbaikan untuk gambar agar tidak terlalu raksasa di layar kecil */
+    #home img {
+      max-height: 80vh;
+      object-fit: contain;
+    }
+    :root {
+      --moonPurple: #7B337E;
+      --moonDeep: #420D4B;
+      --moonLight: #F5D5E0;
+    }
+
+    body { font-family: 'Inter', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
+    .font-anton { font-family: 'Anton', sans-serif; }
+
+    /* 1. WELCOME SCREEN (GATEWAY) */
+    #welcome-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1);
+      background: #F5D5E0;
+    }
+    .dark #welcome-screen { background: #210635; }
+    .welcome-exit { transform: translateY(-100%); pointer-events: none; }
+
+    /* TEKS RAKSASA INTERAKTIF */
+    .bg-text-massive {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%); /* Tambahkan ini agar center */
+      font-size: 20vw;
+      line-height: 0.8;
+      font-family: 'Anton', sans-serif;
+      color: white;
+      opacity: 0.4;
+      white-space: nowrap;
+      z-index: 1;
+      user-select: none;
+      text-transform: uppercase;
+      transition: transform 0.1s ease-out;
+      pointer-events: none;
+
+    }
+
+    .dark .bg-text-massive { color: #420D4B; opacity: 0.3; }
+
+    /* FOTO PROFIL WELCOME - NAPAK BAWAH */
+    .hero-img-container {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      pointer-events: none;
+    }
+    .hero-img-container img {
+      height: 95vh;
+      width: auto;
+      object-fit: contain;
+      object-position: bottom;
+      filter: drop-shadow(0 -10px 50px rgba(123, 51, 126, 0.3));
+    }
+
+    /* CARD SINOPSIS DI GERBANG */
+    .synopsis-card {
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(123, 51, 126, 0.2);
+    }
+    .dark .synopsis-card {
+      background: rgba(33, 6, 53, 0.7);
+      border: 1px solid rgba(245, 213, 224, 0.1);
+    }
+
+    /* 2. ANIMASI KONTEN UTAMA */
+    .fade-section {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.9s cubic-bezier(.4,0,.2,1);
+    }
+    .fade-section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+.font-anton { font-family: 'Anton', sans-serif; }
+
+/* Teks outline supaya gak berat di mata tapi tetep kelihatan */
+.outline-text-heavy {
+  /* Teks transparan dengan stroke yang lebih aman */
+  color: transparent !important;
+  -webkit-text-stroke: 2px #7B337E; /* Warna ungu */
+  /* Tambahkan text-shadow agar tetap terlihat meski stroke gagal dirender */
+  text-shadow: 
+    -2px -2px 0 #7B337E,  
+     2px -2px 0 #7B337E,
+    -2px  2px 0 #7B337E,
+     2px  2px 0 #7B337E;
+  pointer-events: none;
+}
+
+.dark .outline-text-heavy {
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.2);
+  text-shadow: 
+    -2px -2px 0 rgba(255, 255, 255, 0.2),  
+     2px -2px 0 rgba(255, 255, 255, 0.2),
+    -2px  2px 0 rgba(255, 255, 255, 0.2),
+     2px  2px 0 rgba(255, 255, 255, 0.2);
+}
+
+
+h1 {
+  line-height: 1 !important; 
+}
+
+/* Responsive fix: Biar gak tabrakan di layar kecil */
+@media (max-width: 768px) {
+  #home h1 {
+    font-size: 3.5rem !important; /* Dikecilkan di HP agar tidak menumpuk parah */
+    line-height: 0.9 !important;
+  }
+  /* Mengatur foto di HP agar tidak raksasa */
+  .md\:col-span-4 flex img {
+    scale: 1 !important;
+  }
+  .max-w-none {
+    max-width: 100% !important;
+  }
+}
+
+/* Animasi Marquee yang Halus & Lengkap (Perbaikan Durasi agar gak kepotong) */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes marquee2 {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(0%); }
+}
+@keyframes marquee1 {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes marquee-reverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+.animate-marquee-reverse {
+  display: flex;
+  animation: marquee-reverse 30s linear infinite;
+}
+
+.animate-marquee {
+  display: inline-block;
+  animation: marquee 25s linear infinite; /* Durasi ditambah biar gak buru-buru */
+}
+
+.animate-marquee1 {
+  display: flex;
+  animation: marquee1 30s linear infinite;
+}
+
+.animate-marquee2 {
+  position: absolute;
+  display: inline-block;
+  animation: marquee2 25s linear infinite; /* Harus sama durasinya */
+}
+
+/* Memperhalus Floating Gambar */
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1.05); }
+  50% { transform: translateY(-20px) scale(1.05); }
+}
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* Mengatur agar teks background Maverick tidak membuat scrollbar horizontal */
+#home {
+  overflow: hidden;
+}
+
+    /* PROGRESS BAR */
+    .skill-bar { width: 0; transition: width 2s ease-out; }
+    .show .skill-bar { width: var(--target-width); }
+
+    /* CUSTOM SCROLLBAR */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--moonLight); }
+    ::-webkit-scrollbar-thumb { background: var(--moonPurple); border-radius: 10px; }
+
+    /* 2. CAROUSEL 3D ACHIEVEMENTS (LANDSCAPE VERSION) */
+.carousel-3d-container {
+  perspective: 1200px;
+  height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.carousel-3d-spinner {
+  position: relative;
+  width: 300px; /* Diubah dari 200px */
+  height: 200px; /* Diubah dari 300px */
+  transform-style: preserve-3d;
+  animation: rotate3d 15s linear infinite;
+}
+
+.carousel-3d-spinner:hover .item-3d {
+  opacity: 0.3;
+  filter: blur(2px);
+}
+
+.item-3d:hover {
+  opacity: 1 !important;
+  filter: blur(0) !important;
+  transform: translate(-50%, -50%) scale(1.4) translateZ(200px) !important; 
+  box-shadow: 0 0 60px rgba(123, 51, 126, 1);
+  z-index: 999;
+  border-color: #ffffff;
+}
+
+.item-3d {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px; /* Diubah dari 200px */
+  height: 200px; /* Diubah dari 300px */
+  border-radius: 20px;
+  overflow: hidden;
+  border: 4px solid var(--moonPurple);
+  background: white;
+  transform: translate(-50%, -50%); 
+  transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+@keyframes rotate3d {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+    
+    .arcade-container {
+  position: relative;
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arcade-wheel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+}
+
+.arcade-item {
+  position: absolute;
+  width: 280px;
+  height: 300px;
+  transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  transform-origin: center 800px; /* Titik rotasi jauh di bawah untuk busur halus */
+  opacity: 0.5;
+  filter: grayscale(1) blur(2px);
+  pointer-events: none;
+}
+
+.arcade-item.active {
+  opacity: 1;
+  filter: grayscale(0) blur(0);
+  transform: rotate(0deg) scale(1.2) translateZ(100px);
+  z-index: 50;
+  pointer-events: auto;
+}
+
+/* Pengaturan posisi item lainnya (kiri & kanan) */
+.arcade-item.prev { transform: rotate(-25deg) scale(0.8); z-index: 40; opacity: 0.7; }
+.arcade-item.next { transform: rotate(25deg) scale(0.8); z-index: 40; opacity: 0.7; }
+
+.arcade-card {
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  overflow: hidden;
+  border: 6px solid white;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+.arcade-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.arcade-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(123, 51, 126, 0.9));
+  padding: 20px;
+  color: white;
+  text-align: center;
+}
+
+.arcade-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  background: var(--moonPurple);
+  color: white;
+  border-radius: 50%;
+  padding: 10px;
+  transition: 0.3s;
+  box-shadow: 0 10px 20px rgba(123, 51, 126, 0.4);
+}
+
+.arcade-arrow:hover { scale: 1.1; background: #210635; }
+.arcade-arrow.left { left: 5%; }
+.arcade-arrow.right { right: 5%; }
+
+.arcade-footer-label {
+  position: absolute;
+  bottom: 50px;
+  border-top: 2px solid var(--moonPurple);
+  padding-top: 20px;
+  width: 60%;
+  font-size: 10px;
+}
+  </style>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            moonLight: '#F5D5E0',
+            moonBlue: '#6667AB',
+            moonPurple: '#7B337E',
+            moonDeep: '#420D4B',
+            moonBlack: '#210635',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="locked bg-moonLight text-moonBlack dark:bg-moonBlack dark:text-moonLight transition-colors duration-500">
+
+<div id="welcome-screen" onmousemove="moveText(event)">
+  <div id="text-top" class="bg-text-massive top-[10%]">MIFTAHUN</div>
+  <div id="text-bottom" class="bg-text-massive bottom-[10%]">NIKMAH</div>
+
+  <div class="hero-img-container">
+    <img src="assets/pp_baru-removebg-preview.png" alt="Miftahun Nikmah">
+  </div>
+
+  <div class="max-w-7xl w-full h-full mx-auto px-6 relative flex flex-col md:flex-row items-center justify-between z-20">
+    <div class="w-full md:w-1/3 text-left">
+      <h1 class="font-anton text-8xl lg:text-9xl leading-none text-moonBlack dark:text-white transition-transform duration-500 hover:scale-105 cursor-default">
+        Miftahun<br>Nikmah
+      </h1>
+    </div>
+
+    <div class="w-full md:w-1/3 space-y-4">
+      <p class="text-xs font-black tracking-[0.3em] text-moonPurple uppercase">SOFTWARE DEVELOPER • INFORMATION TECHNOLOGY STUDENT</p>
+      
+      <div class="synopsis-card p-4 rounded-xl flex gap-4 items-start shadow-sm hover:translate-x-2 transition-transform">
+        <div class="bg-moonPurple p-2 rounded-lg text-white">💻</div>
+        <div>
+          <h4 class="font-bold text-sm uppercase">WEB APPLICATION DEVELOPMENT</h4>
+          <p class="text-[10px] opacity-70 font-medium leading-relaxed">Designing and developing modern web applications with responsive and user-friendly interfaces.</p>
+        </div>
+      </div>
+
+      <div class="synopsis-card p-4 rounded-xl flex gap-4 items-start shadow-sm hover:translate-x-2 transition-transform">
+        <div class="bg-moonPurple p-2 rounded-lg text-white">📱</div>
+        <div>
+          <h4 class="font-bold text-sm uppercase">MOBILE APP DEVELOPMENT</h4>
+          <p class="text-[10px] opacity-70 font-medium leading-relaxed">Creating functional mobile applications focused on usability and performance.</p>
+        </div>
+      </div>
+
+      <button onclick="enterPortfolio()" 
+              class="w-full mt-6 py-4 bg-moonPurple text-white font-bold rounded-full flex items-center justify-center gap-3 hover:scale-105 transition-all shadow-xl shadow-moonPurple/30 group">
+        VIEW MY PORTFOLIO
+        <svg class="w-5 h-5 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<nav class="fixed top-0 left-0 w-full bg-white/60 dark:bg-moonBlack/60 backdrop-blur-md z-50 border-b border-moonBlue/20">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    
+    <h1 class="text-xl font-bold text-moonPurple uppercase tracking-tighter">
+      MN<span class="opacity-70 text-moonBlack dark:text-moonLight font-light">Studio</span>
+    </h1>
+
+    <div class="flex items-center space-x-8">
+      <ul class="hidden md:flex space-x-8 font-bold text-xs uppercase tracking-widest">
+        <li><a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="hover:text-moonPurple transition">Home</a></li>        
+        <li><a href="#about" class="hover:text-moonPurple transition">About</a></li>
+        <li><a href="#projects" class="hover:text-moonPurple transition">Projects</a></li>
+        <li><a href="#gaming" class="hover:text-moonPurple transition">Gaming</a></li>
+        <li><a href="#achievements" class="hover:text-moonPurple transition">Achievements</a></li>
+        <li><a href="#experience-arcade" class="hover:text-moonPurple transition">Experience</a></li>
+      </ul>
+
+      <label class="relative inline-flex items-center cursor-pointer hover:scale-105 transition-transform">
+        <input type="checkbox" id="theme-toggle" class="sr-only peer">
+        <div class="w-12 h-6 bg-moonBlue/30 peer-checked:bg-moonPurple rounded-full transition-all"></div>
+        <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-all peer-checked:translate-x-6 flex items-center justify-center text-[10px]">🌓</div>
+      </label>
+    </div>
+  </div>
+</nav>
+<section id="home" class="fade-section min-h-screen flex items-center justify-center px-6 py-20 bg-moonLight dark:bg-moonBlack overflow-hidden relative font-anton">
+  
+ <div class="absolute inset-0 flex items-center justify-center overflow-hidden z-0 select-none pointer-events-none">
+  <h1 class="w-full h-screen flex items-center justify-center font-black leading-none uppercase italic opacity-20 dark:opacity-10 outline-text-heavy" 
+      style="font-size: clamp(10rem, 30vw, 50rem);">
+    MIFTAH
+  </h1>
+</div>
+
+  <div class="max-w-7xl mx-auto grid md:grid-cols-12 gap-12 w-full items-center relative z-10">
+    
+    <div class="md:col-span-4 text-center md:text-left">
+      <div class="inline-block px-4 py-1 bg-moonPurple text-white text-[10px] font-black tracking-[0.3em] uppercase rounded-full mb-8">
+        PORTOFOLIO
+      </div>
+
+      <h1 class="text-7xl md:text-[100px] font-black leading-[0.9] text-moonBlack dark:text-white tracking-[0.08em] uppercase mb-8 transition-transform duration-500 hover:scale-105 cursor-default">
+  MIFTAHUN<br>
+  <span class="text-moonPurple italic">NIKMAH</span>
+</h1>
+      <p class="text-[16px] font-medium opacity-60 max-w-[280px] mx-auto md:mx-0 leading-relaxed font-sans uppercase tracking-widest dark:text-white">
+        Building digital solutions with creativity, technology, <span class="text-moonPurple font-black"> and a passion for problem solving.</span>
+      </p>
+    </div>
+
+    <div class="md:col-span-4 flex justify-center relative py-10">
+  <div class="absolute w-[350px] h-[350px] bg-moonPurple/20 rounded-full blur-[100px] -z-10 animate-pulse"></div>
+  
+  <img 
+    src="assets/hp-removebg-preview.png" 
+    alt="Miftahun Nikmah" 
+    class="w-full md:scale-125 drop-shadow-[0_35px_50px_rgba(0,0,0,0.3)] z-20 animate-float"
+  >
+</div>
+
+ <div class="md:col-span-4 flex flex-col gap-2">
+  <a href="https://drive.google.com/drive/folders/153BsEgWKzKzzakSsTa5Y_nq9nmxeExXP?usp=drive_link" target="_blank" rel="noopener noreferrer" class="block">
+    <div class="group relative bg-white/80 dark:bg-white/10 backdrop-blur-md p-8 rounded-2xl border-2 border-moonBlack dark:border-moonPurple/50 transition-all duration-500 hover:scale-[1.03] hover:border-moonPurple shadow-xl hover:shadow-[0_0_40px_rgba(123,51,126,0.3)] cursor-pointer">
+      <h3 class="text-3xl font-black italic group-hover:text-moonPurple transition-colors duration-300">01 MY PROJECT.</h3>
+      <p class="text-[10px] font-sans font-bold mt-3 uppercase opacity-60 group-hover:opacity-100 transition-opacity">Developing innovative and effective digital solutions.</p>
+      <div class="absolute bottom-4 right-6 text-moonPurple opacity-0 group-hover:opacity-100 transition-opacity">➔</div>
+    </div>
+  </a>
+
+  <a href="https://drive.google.com/drive/folders/128UzfbPcyYr7QRHwh7ZSryAyHfaw1p_X?usp=drive_link" target="_blank" rel="noopener noreferrer" class="block">
+    <div class="group relative bg-white/80 dark:bg-white/10 backdrop-blur-md p-8 rounded-2xl border-2 border-moonBlack dark:border-moonPurple/50 transition-all duration-500 hover:scale-[1.03] hover:border-moonPurple shadow-xl hover:shadow-[0_0_40px_rgba(123,51,126,0.3)] cursor-pointer">
+      <h3 class="text-3xl font-black italic group-hover:text-moonPurple transition-colors duration-300">02 MY ACHIEVEMENTS.</h3>
+      <p class="text-[10px] font-sans font-bold mt-3 uppercase opacity-60 group-hover:opacity-100 transition-opacity">Successfully overcoming challenges through creativity and innovation.</p>
+      <div class="absolute bottom-4 right-6 text-moonPurple opacity-0 group-hover:opacity-100 transition-opacity">➔</div>
+    </div>
+  </a>
+
+      <a 
+  href="https://drive.google.com/file/d/1vFuI8750u2tsTFRSS-fhysRNucdhV-AS/view?usp=drive_link" 
+  target="_blank" 
+  rel="noopener noreferrer"
+  class="mt-4 flex items-center justify-between px-10 py-5 bg-moonBlack dark:bg-white text-white dark:text-moonBlack rounded-full font-black text-xs uppercase tracking-widest hover:scale-105 transition-all shadow-2xl hover:shadow-moonPurple/50"
+>
+  Download CV <span>→</span>
+</a>
+    </div>
+  </div>
+
+  <div class="absolute bottom-6 left-0 w-full bg-moonPurple py-4 rotate-[-1deg] border-y-2 border-moonBlack dark:border-white z-30">
+    <div class="flex overflow-hidden whitespace-nowrap">
+      <div class="animate-marquee inline-block text-white text-[10px] font-black tracking-[0.4em] uppercase">
+        INFORMATION TECHNOLOGY EDUCATION • WEB DEVELOPMENT • CREATIVE STRATEGY • INFORMATION TECHNOLOGY EDUCATION • WEB DEVELOPMENT • CREATIVE STRATEGY • INFORMATION TECHNOLOGY EDUCATION • WEB DEVELOPMENT • CREATIVE STRATEGY • 
+      </div>
+      <div class="animate-marquee2 inline-block text-white text-[10px] font-black tracking-[0.4em] uppercase">
+        INFORMATION TECHNOLOGY EDUCATION • WEB DEVELOPMENT • CREATIVE STRATEGY • INFORMATION TECHNOLOGY EDUCATION • WEB DEVELOPMENT • CREATIVE STRATEGY • INFORMATION TECHNOLOGY EDUCATION • WEB DEVELOPMENT • CREATIVE STRATEGY • 
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="fade-section py-32 bg-white/30 dark:bg-moonDeep/10">
+  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-20 items-center">
+    <div>
+      <h2 class="text-4xl font-black mb-8 italic text-moonPurple uppercase tracking-tighter">About & Skills</h2>
+      <p class="text-justify opacity-80 leading-relaxed mb-10 text-lg">Fourth-semester students of the Information Technology Education Study Program who have an interest in the
+development of technology and digital learning media. Have skills in backend development, digital illustration design
+using IbisPaint X, as well as creating simple animations with FlipaClip. Actively develop creativity through hobbies in
+writing and photography. Accustomed to thinking systematically, creatively, and able to combine aspects of technology
+and education to produce innovative solutions.</p>
+      
+      <div class="space-y-8">
+        <div>
+          <div class="flex justify-between mb-2 font-black text-xs uppercase"><span>WEB APPLICATION DEVELOPMENT</span><span>80%</span></div>
+          <div class="h-2 bg-moonBlue/10 rounded-full overflow-hidden"><div class="skill-bar h-full bg-moonPurple" style="--target-width: 80%"></div></div>
+        </div>
+        <div>
+          <div class="flex justify-between mb-2 font-black text-xs uppercase"><span>MOBILE APP DEVELOPMENT</span><span>75%</span></div>
+          <div class="h-2 bg-moonBlue/10 rounded-full overflow-hidden"><div class="skill-bar h-full bg-moonPurple" style="--target-width: 75%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-moonBlack p-10 rounded-[3rem] text-moonLight rotate-3 hover:rotate-0 transition duration-500 shadow-2xl border-b-8 border-moonPurple">
+        <h3 class="font-anton text-2xl mb-6 text-moonPurple uppercase">Quick Profile</h3>
+        <ul class="space-y-5 font-bold text-sm tracking-wide">
+          <li class="flex items-center gap-4"><span class="bg-moonPurple/20 p-2 rounded-lg">🎓</span> Information Technology Education Student (Semester 4)</li>
+          <li class="flex items-center gap-4"><span class="bg-moonPurple/20 p-2 rounded-lg">💻</span> Web & Mobile Application Developer</li>
+          <li class="flex items-center gap-4"><span class="bg-moonPurple/20 p-2 rounded-lg">⚙️</span> Interested in Software Development & Problem Solving</li>
+          <li class="flex items-center gap-4"><span class="bg-moonPurple/20 p-2 rounded-lg">📚</span> Currently Learning Backend & Mobile Development</li>
+        </ul>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="fade-section py-32">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-5xl font-black text-center mb-20 italic tracking-tighter uppercase">Selected Work</h2>
+    <div class="grid md:grid-cols-3 gap-10">
+
+      <a href="https://github.com/wandamoff/SiBooking.git">
+      <div class="group bg-white dark:bg-moonDeep/20 p-8 rounded-[2.5rem] border border-moonPurple/10 hover:border-moonPurple transition-all hover:-translate-y-4 shadow-xl">
+        <div class="w-12 h-12 bg-moonPurple/10 rounded-2xl flex items-center justify-center text-2xl mb-6">🗓️</div>
+        <h3 class="text-xl font-black mb-4 text-moonPurple uppercase">SIBOOKING</h3>
+        <p class="text-sm opacity-60 mb-8 leading-relaxed">Room reservation dashboard application for managing room bookings efficiently.</p>
+        <div class="flex flex-wrap gap-2">
+            <span class="text-[9px] font-black px-3 py-1 bg-moonPurple text-white rounded-full uppercase tracking-tighter">Dashboard</span>
+            <span class="text-[9px] font-black px-3 py-1 bg-moonPurple/10 rounded-full text-moonPurple uppercase tracking-tighter">Java</span>
+            <span class="text-[9px] font-black px-3 py-1 bg-moonPurple/10 rounded-full text-moonPurple uppercase tracking-tighter">NetBeans</span>
+        </div>
+      </div>
+  </a>
+
+            <a href="https://github.com/niken123-lab/Nesafood-Food-Mobile-App.git">
+      <div class="group bg-white dark:bg-moonDeep/20 p-8 rounded-[2.5rem] border border-moonPurple/10 hover:border-moonPurple transition-all hover:-translate-y-4 shadow-xl">
+        <div class="w-12 h-12 bg-moonPurple/10 rounded-2xl flex items-center justify-center text-2xl mb-6">🍔</div>
+        <h3 class="text-xl font-black mb-4 text-moonPurple uppercase">NESAFOOD MOBILE APP</h3>
+        <p class="text-sm opacity-60 mb-8 leading-relaxed">A mobile food ordering application with a clean and user-friendly interface.</p>
+        <div class="flex flex-wrap gap-2">
+            <span class="text-[9px] font-black px-3 py-1 bg-moonPurple text-white rounded-full uppercase tracking-tighter">Mobile</span>
+            <span class="text-[9px] font-black px-3 py-1 bg-moonPurple/10 rounded-full text-moonPurple uppercase tracking-tighter">Figma</span>
+            <span class="text-[9px] font-black px-3 py-1 bg-moonPurple/10 rounded-full text-moonPurple uppercase tracking-tighter">UI/UX</span>
+        </div>
+      </div>
+  </a>
+
+        <a href="https://github.com/niken123-lab/SIMAS-student-academic-monitoring-system.git" >
+      <div class="group bg-white dark:bg-moonDeep/20 p-8 rounded-[2.5rem] border border-moonPurple/10 hover:border-moonPurple transition-all hover:-translate-y-4 shadow-xl">
+        <div class="w-12 h-12 bg-moonPurple/10 rounded-2xl flex items-center justify-center text-2xl mb-6">🏫</div>
+        <h3 class="text-xl font-black mb-4 text-moonPurple uppercase">SIMAS</h3>
+        <p class="text-sm opacity-60 mb-8 leading-relaxed">A web-based academic information system for managing student academic data.</p>
+        <div class="flex flex-wrap gap-2">
+            <span class="text-[9px] font-black px-3 py-1 bg-moonPurple text-white rounded-full uppercase tracking-tighter">Dashboard</span>
+            <span class="text-[9px] font-black px-3 py-1 bg-moonPurple/10 rounded-full text-moonPurple uppercase tracking-tighter">MySQL</span>
+           <span class="text-[9px] font-black px-3 py-1 bg-moonPurple/10 rounded-full text-moonPurple uppercase tracking-tighter">Visual Studio 2022</span> 
+        </div>
+      </div>
+      </a>
+    </div>
+    <div class="mt-32 flex flex-col gap-6 overflow-hidden">
+  
+      <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-5xl font-black text-center mb-8 italic tracking-tighter uppercase">Other Projects</h2>
+    </div>  
+
+  <div class="flex whitespace-nowrap">
+    <div class="animate-marquee1 flex gap-4">
+      <img src="assets/Screenshot 2026-03-07 113205.png" class="w-64 h-40 object-cover rounded-2xl grayscale hover:grayscale-0 transition-all border-2 border-moonPurple">
+      <video src="assets/lv_0_20250114202055.mp4" muted autoplay loop class="w-64 h-40 object-cover rounded-2xl grayscale hover:grayscale-0 transition-all border-2 border-moonPurple"></video>
+      <img src="assets/Screenshot 2026-03-07 113356.png" class="w-64 h-40 object-cover rounded-2xl grayscale hover:grayscale-0 transition-all border-2 border-moonPurple">
+      <img src="assets/Screenshot 2026-03-07 113302.png" class="w-64 h-40 object-cover rounded-2xl grayscale hover:grayscale-0 transition-all border-2 border-moonPurple">
+      <img src="assets/Screenshot 2026-03-07 113309.png" class="w-64 h-40 object-cover rounded-2xl grayscale hover:grayscale-0 transition-all border-2 border-moonPurple">
+      <video src="assets/lv_0_20250712182550.mp4" muted autoplay loop class="w-64 h-40 object-cover rounded-2xl grayscale hover:grayscale-0 transition-all border-2 border-moonPurple"></video>
+      <img src="assets/Screenshot 2026-03-07 113346.png" class="w-64 h-40 object-cover rounded-2xl grayscale hover:grayscale-0 transition-all border-2 border-moonPurple">
+    </div>
+  </div>
+
+  <div class="flex whitespace-nowrap">
+    <div class="animate-marquee-reverse flex gap-4">
+      <img src="assets/Screenshot 2026-03-07 113205.png" class="w-64 h-40 object-cover rounded-2xl grayscale hover:grayscale-0 transition-all border-2 border-moonPurple">
+      <img src="assets/Screenshot 2026-03-07 113356.png" class="w-64 h-40 object-cover rounded-2xl grayscale hover:grayscale-0 transition-all border-2 border-moonPurple">
+      <video src="assets/lv_0_20250114202055.mp4" muted autoplay loop class="w-64 h-40 object-cover rounded-2xl grayscale hover:grayscale-0 transition-all border-2 border-moonPurple"></video>
+      <img src="assets/Screenshot 2026-03-07 113302.png" class="w-64 h-40 object-cover rounded-2xl grayscale hover:grayscale-0 transition-all border-2 border-moonPurple">
+      <img src="assets/Screenshot 2026-03-07 113309.png" class="w-64 h-40 object-cover rounded-2xl grayscale hover:grayscale-0 transition-all border-2 border-moonPurple">
+      <img src="assets/Screenshot 2026-03-07 113346.png" class="w-64 h-40 object-cover rounded-2xl grayscale hover:grayscale-0 transition-all border-2 border-moonPurple">
+      <video src="assets/lv_0_20250712182550.mp4" muted autoplay loop class="w-64 h-40 object-cover rounded-2xl grayscale hover:grayscale-0 transition-all border-2 border-moonPurple"></video>
+    </div>
+  </div>
+
+  <div class="flex whitespace-nowrap">
+    <div class="animate-marquee1 flex gap-4">
+      <img src="assets/Screenshot 2026-03-07 113205.png" class="w-64 h-40 object-cover rounded-2xl grayscale hover:grayscale-0 transition-all border-2 border-moonPurple">
+      <video src="assets/lv_0_20250114202055.mp4" muted autoplay loop class="w-64 h-40 object-cover rounded-2xl grayscale hover:grayscale-0 transition-all border-2 border-moonPurple"></video>
+      <img src="assets/Screenshot 2026-03-07 113356.png" class="w-64 h-40 object-cover rounded-2xl grayscale hover:grayscale-0 transition-all border-2 border-moonPurple">
+      <img src="assets/Screenshot 2026-03-07 113302.png" class="w-64 h-40 object-cover rounded-2xl grayscale hover:grayscale-0 transition-all border-2 border-moonPurple">
+      <img src="assets/Screenshot 2026-03-07 113309.png" class="w-64 h-40 object-cover rounded-2xl grayscale hover:grayscale-0 transition-all border-2 border-moonPurple">
+      <img src="assets/Screenshot 2026-03-07 113346.png" class="w-64 h-40 object-cover rounded-2xl grayscale hover:grayscale-0 transition-all border-2 border-moonPurple">
+      <video src="assets/lv_0_20250712182550.mp4" muted autoplay loop class="w-64 h-40 object-cover rounded-2xl grayscale hover:grayscale-0 transition-all border-2 border-moonPurple"></video>
+    </div>
+  </div>
+
+</div>
+  </div>
+  
+  <div class="mt-20 text-center">
+    <a href="https://drive.google.com/drive/folders/153BsEgWKzKzzakSsTa5Y_nq9nmxeExXP?usp=drive_link" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="inline-block px-10 py-4 bg-moonPurple text-white font-black italic uppercase tracking-[0.2em] rounded-full border-2 border-moonPurple hover:bg-transparent hover:text-moonPurple transition-all duration-300 transform hover:scale-110 shadow-lg hover:shadow-[0_0_30px_rgba(123,51,126,0.5)]">
+      View More Projects ➔
+    </a>
+  </div>
+</section>
+
+<section id="gaming" class="fade-section py-32 bg-white/30 dark:bg-moonDeep/10">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-5xl font-black text-center mb-20 uppercase italic tracking-tighter">Gaming Profile</h2>
+    <div class="grid md:grid-cols-3 gap-8 mb-24">
+      <div onclick="scrollToHero()" class="cursor-pointer bg-white dark:bg-moonDeep/30 p-10 rounded-[3rem] text-center border border-moonPurple/10 shadow-lg transition-all hover:bg-moonPurple hover:text-white hover:-translate-y-2 group">
+        <div class="text-5xl mb-6 group-hover:scale-110 transition">🛡️</div>
+        <h3 class="font-bold uppercase tracking-widest text-[10px] opacity-50">Main Role</h3>
+        <p class="font-black mt-2 text-2xl">Fighter / Tank</p>
+      </div>
+      <div onclick="scrollToHero()" class="cursor-pointer bg-white dark:bg-moonDeep/30 p-10 rounded-[3rem] text-center border border-moonPurple/10 shadow-lg transition-all hover:bg-moonPurple hover:text-white hover:-translate-y-2 group">
+        <div class="text-5xl mb-6 group-hover:scale-110 transition">🔨</div>
+        <h3 class="font-bold uppercase tracking-widest text-[10px] opacity-50">Fav Hero</h3>
+        <p class="font-black mt-2 text-2xl">Terizla</p>
+      </div>
+      <div onclick="showRankAlert()" class="cursor-pointer bg-white dark:bg-moonDeep/30 p-10 rounded-[3rem] text-center border border-moonPurple/10 shadow-lg transition-all hover:bg-moonPurple hover:text-white hover:-translate-y-2 group">
+        <div class="text-5xl mb-6 group-hover:scale-110 transition">🏆</div>
+        <h3 class="font-bold uppercase tracking-widest text-[10px] opacity-50">Current Rank</h3>
+        <p class="font-black mt-2 text-2xl">Mythic</p>
+      </div>
+    </div>
+
+    <div id="hero-terizla" class="fade-section bg-moonBlack text-moonLight rounded-[4rem] p-10 md:p-20 overflow-hidden shadow-2xl relative">
+      <div class="absolute -top-24 -right-24 w-96 h-96 bg-moonPurple/20 rounded-full blur-[100px]"></div>
+      <div class="grid md:grid-cols-2 gap-16 items-center relative z-10">
+        <div class="flex justify-center">
+            <img src="assets/Terizla MLBB.jpg" class="w-full max-w-sm rounded-[2.5rem] border-8 border-moonPurple/20 shadow-2xl rotate-[-2deg]">
+        </div>
+        <div>
+          <h3 class="text-5xl font-black mb-2 text-white uppercase tracking-tighter italic">Terizla</h3>
+          <p class="text-moonPurple font-black mb-10 uppercase text-xs tracking-[0.4em]">The Executioner • Strength Above All</p>
+          
+          <div class="flex gap-4 mb-10 overflow-x-auto pb-2">
+            <button onclick="showTab(event, 'profile')" class="tab-btn px-8 py-3 bg-moonPurple rounded-full text-[10px] font-black text-white shadow-lg whitespace-nowrap">PROFILE</button>
+            <button onclick="showTab(event, 'skills-tab')" class="tab-btn px-8 py-3 bg-white/10 rounded-full text-[10px] font-black hover:bg-white/20 transition whitespace-nowrap">SKILLS</button>
+            <button onclick="showTab(event, 'stats-tab')" class="tab-btn px-8 py-3 bg-white/10 rounded-full text-[10px] font-black hover:bg-white/20 transition whitespace-nowrap">STATS</button>
+          </div>
+
+          <div id="profile" class="text-justify tab-content text-base leading-relaxed space-y-6 opacity-80">
+<p>Terizla was once a legendary blacksmith known for forging powerful weapons. However, he was imprisoned and tortured for ten years after refusing to serve the kingdom. <span class="text-moonPurple font-bold italic">Pain & Vengeance</span>. His family was destroyed and his life was taken away from him. Filled with anger and revenge, Terizla eventually joined the Abyss, becoming a ruthless executioner who punishes those he believes are unjust.</p>        
+<p class="text-sm border-l-4 border-moonPurple pl-4 italic">"Ten years... I was imprisoned for ten long years."</p>          </div>
+
+          <div id="skills-tab" class="tab-content hidden space-y-5">
+  <div class="flex items-center gap-4 bg-white/5 p-4 rounded-2xl">
+    <span class="text-2xl">🛡️</span>
+    <p class="text-xs font-black uppercase tracking-widest">Body of Smith (Passive - Damage Reduction)</p>
+  </div>
+
+  <div class="flex items-center gap-4 bg-white/5 p-4 rounded-2xl">
+    <span class="text-2xl">⚒️</span>
+    <p class="text-xs font-black uppercase tracking-widest">Revenge Strike (Slow & Damage)</p>
+  </div>
+
+  <div class="flex items-center gap-4 bg-white/5 p-4 rounded-2xl">
+    <span class="text-2xl">🔨</span>
+    <p class="text-xs font-black uppercase tracking-widest">Execution Strike (Burst Damage)</p>
+  </div>
+
+  <div class="flex items-center gap-4 bg-white/5 p-4 rounded-2xl">
+    <span class="text-2xl">⛓️</span>
+    <p class="text-xs font-black uppercase tracking-widest">Penalty Zone (Ultimate - Crowd Control)</p>
+  </div>
+</div>
+
+          <div id="stats-tab" class="tab-content hidden space-y-6">
+  <div>
+    <div class="flex justify-between text-[10px] mb-2 font-black uppercase tracking-widest">
+      <span>Durability</span><span>90%</span>
+    </div>
+    <div class="h-2 bg-white/10 rounded-full">
+      <div class="h-full bg-moonPurple rounded-full shadow-[0_0_15px_#7B337E]" style="width: 90%"></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="flex justify-between text-[10px] mb-2 font-black uppercase tracking-widest">
+      <span>Damage</span><span>88%</span>
+    </div>
+    <div class="h-2 bg-white/10 rounded-full">
+      <div class="h-full bg-moonPurple rounded-full shadow-[0_0_15px_#7B337E]" style="width: 88%"></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="flex justify-between text-[10px] mb-2 font-black uppercase tracking-widest">
+      <span>Crowd Control</span><span>85%</span>
+    </div>
+    <div class="h-2 bg-white/10 rounded-full">
+      <div class="h-full bg-moonPurple rounded-full shadow-[0_0_15px_#7B337E]" style="width: 85%"></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="flex justify-between text-[10px] mb-2 font-black uppercase tracking-widest">
+      <span>Teamfight</span><span>95%</span>
+    </div>
+    <div class="h-2 bg-white/10 rounded-full">
+      <div class="h-full bg-moonPurple rounded-full shadow-[0_0_15px_#7B337E]" style="width: 95%"></div>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+
+<section id="achievements" class="fade-section py-32 bg-moonLight dark:bg-moonBlack overflow-hidden">
+  <div class="max-w-6xl mx-auto px-6 w-full text-center">
+    <h2 class="text-5xl font-black italic tracking-tighter uppercase text-moonPurple mb-10">
+      Achievements Display
+    </h2>
+    
+    <div class="carousel-3d-container floating-container">
+      <div class="carousel-3d-spinner">
+        
+        <a href="#" class="item-3d" style="transform: translate(-50%, -50%) rotateY(0deg) translateZ(350px);">
+          <img src="assets/IMG-20250304-WA0017.jpg" class="w-full h-full object-cover">
+        </a>
+        
+        <a href="#" class="item-3d" style="transform: translate(-50%, -50%) rotateY(72deg) translateZ(350px);">
+          <img src="assets/IMG_20260305_101354.jpg" class="w-full h-full object-cover">
+        </a>
+        
+        <a href="#" class="item-3d" style="transform: translate(-50%, -50%) rotateY(144deg) translateZ(350px);">
+          <img src="assets/Miftahun Nikmah .jpg" class="w-full h-full object-cover">
+        </a>
+        
+        <a href="#" class="item-3d" style="transform: translate(-50%, -50%) rotateY(216deg) translateZ(350px);">
+          <img src="assets/SERTIFIKAT CERPEN (164).png" class="w-full h-full object-cover">
+        </a>
+        
+        <a href="#" class="item-3d" style="transform: translate(-50%, -50%) rotateY(288deg) translateZ(350px);">
+          <img src="assets/Miftahun Nikmah-1.jpg" class="w-full h-full object-cover">
+        </a>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience-arcade" class="fade-section py-32 bg-white/30 dark:bg-moonDeep/10 overflow-hidden">
+  <div class="max-w-6xl mx-auto px-6 text-center relative">
+    <h2 class="text-5xl font-black italic tracking-tighter uppercase text-moonPurple mb-20">
+      Education & Journey
+    </h2>
+
+    <div class="arcade-container">
+      <button class="arcade-arrow left" onclick="rotateArcade(-1)">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-10 h-10"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+      </button>
+
+      <div class="arcade-wheel" id="arcadeWheel">
+        <div class="arcade-item active">
+          <div class="arcade-card">
+            <img src="assets/IMG_20240819_190136_091.jpg" alt="Unesa">
+            <div class="arcade-info">
+              <h4 class="font-anton">UNESA</h4>
+              <p>Bachelor's Degree in Information Technology Education</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="arcade-item active">
+          <div class="arcade-card">
+            <img src="assets/IMG_20260306_135257.jpg" alt="Unesa">
+            <div class="arcade-info">
+              <h4 class="font-anton">SMAN 7 SURABAYA</h4>
+              <p>Science and Mathematics Program (MIPA)</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="arcade-item">
+          <div class="arcade-card">
+            <img src="assets/IMG_9782.JPG" alt="NHC">
+            <div class="arcade-info">
+              <h4 class="font-anton">FREELANCE</h4>
+              <p>Mitra Baitullah IT Team</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="arcade-item">
+          <div class="arcade-card">
+            <img src="assets/IMG_20260117_081126.jpg" alt="NHC">
+            <div class="arcade-info">
+              <h4 class="font-anton">FREELANCE</h4>
+              <p>Scout Mentor at Antasari Kindergarten</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="arcade-item">
+          <div class="arcade-card">
+            <img src="assets/IMG_20210910_174054.jpg" alt="NHC">
+            <div class="arcade-info">
+              <h4 class="font-anton">ISLAMIC EDUCATION INSTRUCTOR</h4>
+              <p>TPQ Ibnu Ihsan</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="arcade-item">
+          <div class="arcade-card">
+            <img src="assets/IMG_20251227_162108.jpg" alt="Project">
+            <div class="arcade-info">
+              <h4 class="font-anton">VOLUNTEER</h4>
+              <p>Pelajar Mengajar Surabaya</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="arcade-arrow right" onclick="rotateArcade(1)">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-10 h-10"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+      </button>
+
+      <div class="arcade-footer-label">
+        <span class="text-moonPurple font-black tracking-widest uppercase">• Miftahun Nikmah Journey •</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="bg-white/50 dark:bg-moonDeep/20 pt-20 pb-10 border-t border-moonPurple/10">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    
+    <div class="mb-16">
+      <h2 class="text-4xl md:text-6xl font-anton text-moonPurple uppercase mb-6 tracking-tighter">Let's Build Something<br>Great Together</h2>
+      <p class="opacity-60 font-medium mb-10 max-w-md mx-auto">Available for freelance projects or exciting collaborations.
+Feel free to contact me via email or social media.</p>
+      
+      <a href="mailto:miftahunnikmah3690@gmail.com" target="_blank" class="inline-flex items-center gap-3 px-10 py-5 bg-moonPurple text-white rounded-full font-black hover:scale-105 transition-all shadow-2xl shadow-moonPurple/40 group">
+        SEND ME AN EMAIL
+        <span class="group-hover:rotate-12 transition-transform">📩</span>
+      </a>
+      <button onclick="copyEmail()" class="block mt-4 text-[10px] font-bold opacity-40 hover:opacity-100 transition-opacity uppercase tracking-widest mx-auto">
+  OR CLICK TO COPY EMAIL
+</button>
+
+<script>
+function copyEmail() {
+  navigator.clipboard.writeText('miftahunnikmah3690@gmail.com');
+  alert('Email berhasil disalin! 💜');
+}
+</script>
+    </div>
+
+    <hr class="border-moonPurple/10 mb-12">
+
+    <div class="flex flex-col md:flex-row justify-between items-center gap-10 mb-12">
+      <div class="text-left order-2 md:order-1">
+        <h1 class="text-3xl font-black text-moonPurple uppercase tracking-tighter italic">MN<span class="opacity-50 text-moonBlack dark:text-moonLight font-light">Studio</span></h1>
+        <p class="text-[10px] font-bold opacity-40 tracking-[0.3em] uppercase mt-2">Strategy Meets Code • Information Technology Education.</p>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-4 order-1 md:order-2">
+        <a href="https://github.com/niken123-lab" target="_blank" 
+           class="flex items-center gap-3 px-5 py-3 bg-white dark:bg-white/10 border border-moonPurple/20 rounded-2xl hover:bg-moonPurple transition-all group shadow-sm">
+          <svg class="w-5 h-5 fill-moonPurple dark:fill-moonLight group-hover:fill-white transition-colors" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          <span class="text-[10px] font-black uppercase tracking-widest text-moonPurple dark:text-moonLight group-hover:text-white">Github</span>
+        </a>
+
+        <a href="https://instagram.com/n1k_en" target="_blank" 
+           class="flex items-center gap-3 px-5 py-3 bg-white dark:bg-white/10 border border-moonPurple/20 rounded-2xl hover:bg-moonPurple transition-all group shadow-sm">
+          <svg class="w-5 h-5 fill-moonPurple dark:fill-moonLight group-hover:fill-white transition-colors" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259 0.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.791-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.209-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <span class="text-[10px] font-black uppercase tracking-widest text-moonPurple dark:text-moonLight group-hover:text-white">Instagram</span>
+        </a>
+
+        <a href="https://www.linkedin.com/in/miftahun-nikmah-44865733b/" target="_blank" 
+           class="flex items-center gap-3 px-5 py-3 bg-white dark:bg-white/10 border border-moonPurple/20 rounded-2xl hover:bg-moonPurple transition-all group shadow-sm">
+          <svg class="w-5 h-5 fill-moonPurple dark:fill-moonLight group-hover:fill-white transition-colors" viewBox="0 0 24 24"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/></svg>
+          <span class="text-[10px] font-black uppercase tracking-widest text-moonPurple dark:text-moonLight group-hover:text-white">LinkedIn</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="text-[10px] opacity-30 font-black uppercase tracking-[0.5em]">
+      &copy; 2026 Miftahun Nikmah • Made with 💜 in Surabaya
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  // 1. GATEWAY CONTROL
+  function enterPortfolio() {
+    const ws = document.getElementById('welcome-screen');
+    
+    // 1. Pastikan saat gerbang terbuka, layar langsung di posisi paling atas
+    window.scrollTo(0, 0); 
+    
+    ws.classList.add('welcome-exit');
+    document.body.classList.remove('locked');
+    
+    // 2. Berikan delay kecil agar animasi 'fade-in' sinkron dengan hilangnya gerbang
+    setTimeout(() => { 
+      document.getElementById('home').classList.add('show'); 
+    }, 100); 
+  }
+
+  // 2. TEKS INTERAKTIF GERBANG (Parallax)
+  function moveText(e) {
+  const textTop = document.getElementById('text-top');
+  const textBottom = document.getElementById('text-bottom');
+  
+  // Hitung jarak kursor dari tengah layar
+  const x = (window.innerWidth / 2 - e.pageX) / 30;
+  const y = (window.innerHeight / 2 - e.pageY) / 30;
+
+  // Sumbu X: Pakai calc(-50% + x) agar tetap center horizontal
+  // Sumbu Y: Gunakan Math.abs agar teks top selalu negatif (ke atas) 
+  // dan teks bottom selalu positif (ke bawah) --> EFEK MEKAR KELUAR
+  
+  textTop.style.transform = `translate(calc(-50% + ${x}px), calc(0% - ${Math.abs(y)}px))`;
+  textBottom.style.transform = `translate(calc(-50% + ${x}px), calc(0% + ${Math.abs(y)}px))`;
+}
+
+  // 3. FADE-IN OBSERVER (Scroll Animation)
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { 
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-section').forEach(s => observer.observe(s));
+
+  // 4. TABS TERIZLA LOGIC
+  function showTab(event, tabId) {
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+    document.querySelectorAll('.tab-btn').forEach(b => {
+      b.classList.remove('bg-moonPurple', 'text-white', 'shadow-lg');
+      b.classList.add('bg-white/10');
+    });
+    document.getElementById(tabId).classList.remove('hidden');
+    event.currentTarget.classList.remove('bg-white/10');
+    event.currentTarget.classList.add('bg-moonPurple', 'text-white', 'shadow-lg');
+  }
+
+  // 5. SCROLL TO HERO (Smooth)
+  function scrollToHero() {
+    document.getElementById("hero-terizla").scrollIntoView({ behavior: "smooth" });
+  }
+
+  // 6. RANK ALERT (Interactivity)
+  function showRankAlert() {
+    const isDark = document.documentElement.classList.contains('dark');
+    const alertDiv = document.createElement('div');
+    alertDiv.className = "fixed top-10 left-1/2 -translate-x-1/2 z-[200] px-10 py-5 rounded-3xl shadow-2xl font-black transition-all duration-500 transform -translate-y-20 opacity-0 border-2 uppercase tracking-widest text-xs";
+    alertDiv.style.backgroundColor = isDark ? '#210635' : '#F5D5E0';
+    alertDiv.style.color = '#7B337E';
+    alertDiv.style.borderColor = '#7B337E';
+    alertDiv.innerHTML = "🏆 Mythic Rank Respect!";
+    document.body.appendChild(alertDiv);
+    setTimeout(() => alertDiv.classList.remove('-translate-y-20', 'opacity-0'), 100);
+    setTimeout(() => {
+      alertDiv.classList.add('-translate-y-20', 'opacity-0');
+      setTimeout(() => alertDiv.remove(), 500);
+    }, 3000);
+  }
+
+  // 7. DARK MODE TOGGLE
+  const toggle = document.getElementById("theme-toggle");
+  if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark');
+    toggle.checked = true;
+  }
+  toggle.addEventListener("change", () => {
+    if (toggle.checked) {
+      document.documentElement.classList.add('dark');
+      localStorage.theme = 'dark';
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.theme = 'light';
+    }
+  });
+
+let currentArcadeIndex = 0;
+const arcadeItems = document.querySelectorAll('.arcade-item');
+
+function rotateArcade(direction) {
+  currentArcadeIndex = (currentArcadeIndex + direction + arcadeItems.length) % arcadeItems.length;
+  updateArcadeDisplay();
+}
+
+function updateArcadeDisplay() {
+  arcadeItems.forEach((item, index) => {
+    item.classList.remove('active', 'prev', 'next');
+    
+    if (index === currentArcadeIndex) {
+      item.classList.add('active');
+    } else if (index === (currentArcadeIndex - 1 + arcadeItems.length) % arcadeItems.length) {
+      item.classList.add('prev');
+    } else if (index === (currentArcadeIndex + 1) % arcadeItems.length) {
+      item.classList.add('next');
+    }
+  });
+}
+
+updateArcadeDisplay();
+</script>
+
+</body>
+</html>
