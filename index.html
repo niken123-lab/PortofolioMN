@@ -414,6 +414,38 @@ h1 {
   .arcade-item.prev { transform: rotate(-15deg) scale(0.7); }
   .arcade-item.next { transform: rotate(15deg) scale(0.7); }
 }
+@media (max-width: 768px) {
+  /* Memindah foto ke tengah layar agar tidak tertutup tombol */
+  .hero-img-container {
+    height: 100vh;
+    display: flex;
+    align-items: center; /* Foto jadi di tengah vertikal */
+    justify-content: center;
+    bottom: auto;
+    top: 0;
+  }
+
+  .hero-img-container img {
+    height: 45vh; /* Ukuran foto di HP (pas di tengah) */
+    width: auto;
+    object-position: center;
+    opacity: 0.6; /* Dibuat agak transparan agar teks di depan terbaca jelas */
+  }
+
+  /* Menyesuaikan teks raksasa di belakang agar tidak berantakan */
+  .bg-text-massive {
+    font-size: 30vw !important;
+    opacity: 0.1 !important;
+  }
+
+  /* Membuat kontainer utama memenuhi layar agar tombol ada di bawah */
+  #welcome-screen .max-w-7xl {
+    height: 100dvh; /* Menggunakan dynamic viewport height untuk HP */
+    justify-content: space-between;
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+  }
+}
   </style>
 
   <script>
@@ -435,7 +467,6 @@ h1 {
 </head>
 
 <body class="locked bg-moonLight text-moonBlack dark:bg-moonBlack dark:text-moonLight transition-colors duration-500">
-
 <div id="welcome-screen" onmousemove="moveText(event)">
   <div id="text-top" class="bg-text-massive top-[10%]">MIFTAHUN</div>
   <div id="text-bottom" class="bg-text-massive bottom-[10%]">NIKMAH</div>
@@ -444,36 +475,39 @@ h1 {
     <img src="assets/pp_baru-removebg-preview.png" alt="Miftahun Nikmah">
   </div>
 
-  <div class="max-w-7xl w-full h-full mx-auto px-6 relative flex flex-col md:flex-row items-center justify-between z-20">
-    <div class="w-full md:w-1/3 text-left">
-      <h1 class="font-anton text-8xl lg:text-9xl leading-none text-moonBlack dark:text-white transition-transform duration-500 hover:scale-105 cursor-default">
-        Miftahun<br>Nikmah
+  <div class="max-w-7xl w-full h-full mx-auto px-6 relative flex flex-col md:flex-row items-center justify-end md:justify-between z-20 py-10 md:py-0">
+    
+    <div class="w-full md:w-1/3 text-center md:text-left mb-6 md:mb-0">
+      <h1 class="font-anton text-5xl md:text-8xl lg:text-9xl leading-none text-moonBlack dark:text-white transition-transform duration-500 hover:scale-105 cursor-default">
+        Miftahun<br class="hidden md:block"> Nikmah
       </h1>
     </div>
 
-    <div class="w-full md:w-1/3 space-y-4">
-      <p class="text-xs font-black tracking-[0.3em] text-moonPurple uppercase">SOFTWARE DEVELOPER • INFORMATION TECHNOLOGY STUDENT</p>
+    <div class="w-full md:w-1/3 space-y-3 md:space-y-4">
+      <p class="text-[8px] md:text-xs font-black tracking-[0.2em] md:tracking-[0.3em] text-center md:text-left text-moonPurple uppercase">
+        SOFTWARE DEVELOPER • INFORMATION TECHNOLOGY STUDENT
+      </p>
       
-      <div class="synopsis-card p-4 rounded-xl flex gap-4 items-start shadow-sm hover:translate-x-2 transition-transform">
-        <div class="bg-moonPurple p-2 rounded-lg text-white">💻</div>
+      <div class="synopsis-card p-3 md:p-4 rounded-xl flex gap-3 md:gap-4 items-start shadow-sm hover:translate-x-2 transition-transform">
+        <div class="bg-moonPurple p-2 rounded-lg text-white text-xs md:text-base">💻</div>
         <div>
-          <h4 class="font-bold text-sm uppercase">WEB APPLICATION DEVELOPMENT</h4>
-          <p class="text-[10px] opacity-70 font-medium leading-relaxed">Designing and developing modern web applications with responsive and user-friendly interfaces.</p>
+          <h4 class="font-bold text-[10px] md:text-sm uppercase text-left">WEB APPLICATION DEVELOPMENT</h4>
+          <p class="text-[8px] md:text-[10px] opacity-70 font-medium leading-relaxed text-left">Designing and developing modern web applications with responsive and user-friendly interfaces.</p>
         </div>
       </div>
 
-      <div class="synopsis-card p-4 rounded-xl flex gap-4 items-start shadow-sm hover:translate-x-2 transition-transform">
-        <div class="bg-moonPurple p-2 rounded-lg text-white">📱</div>
+      <div class="synopsis-card p-3 md:p-4 rounded-xl flex gap-3 md:gap-4 items-start shadow-sm hover:translate-x-2 transition-transform">
+        <div class="bg-moonPurple p-2 rounded-lg text-white text-xs md:text-base">📱</div>
         <div>
-          <h4 class="font-bold text-sm uppercase">MOBILE APP DEVELOPMENT</h4>
-          <p class="text-[10px] opacity-70 font-medium leading-relaxed">Creating functional mobile applications focused on usability and performance.</p>
+          <h4 class="font-bold text-[10px] md:text-sm uppercase text-left">MOBILE APP DEVELOPMENT</h4>
+          <p class="text-[8px] md:text-[10px] opacity-70 font-medium leading-relaxed text-left">Creating functional mobile applications focused on usability and performance.</p>
         </div>
       </div>
 
       <button onclick="enterPortfolio()" 
-              class="w-full mt-6 py-4 bg-moonPurple text-white font-bold rounded-full flex items-center justify-center gap-3 hover:scale-105 transition-all shadow-xl shadow-moonPurple/30 group">
+              class="w-full mt-4 md:mt-6 py-3 md:py-4 bg-moonPurple text-white text-sm md:text-base font-bold rounded-full flex items-center justify-center gap-3 hover:scale-105 transition-all shadow-xl shadow-moonPurple/30 group">
         VIEW MY PORTFOLIO
-        <svg class="w-5 h-5 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        <svg class="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
       </button>
     </div>
   </div>
